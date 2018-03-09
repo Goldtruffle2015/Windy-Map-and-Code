@@ -1,4 +1,4 @@
-think(500)
+think(0)
 # Variables
 def turn_right():
     repeat 3:
@@ -6,8 +6,72 @@ def turn_right():
 def turn_around():
     repeat 2:
         turn_left()
+def search():
+    turn_left()
+    if front_is_clear():
+        move()
+        turn_left()
+        if front_is_clear():
+            move()
+            turn_left()
+            if front_is_clear():
+                repeat 2:
+                    move()
+                turn_around()
+                build_wall()
+                turn_left()
+            else:
+                turn_left()
+                move()
+                turn_right()
+                move()
+                turn_right()
+                move()
+                turn_around()
+                build_wall()
+                turn_left()
+        else:
+            turn_left()
+            move()
+            turn_right()
+            move()
+            if right_is_clear():
+                turn_around()
+                build_wall()
+                turn_left()
+            else:
+                turn_left()
+                move()
+                turn_around()
+                build_wall()
+                turn_left()
+    else:
+        turn_left()
+        move()
+        if right_is_clear():
+            turn_right()
+            move()
+            if right_is_clear():
+                turn_around()
+                move()
+                turn_left()
+                build_wall()
+                turn_left()
+            else:
+                turn_around()
+                repeat 2:
+                    move()
+                turn_around()
+                build_wall()
+                turn_left()
+        else:
+            turn_left()
+            move()
+            turn_around()
+            build_wall()
+            turn_left()
 # CODE STARTS HERE
-repeat 1000:
+repeat 100:
     if right_is_clear():
         turn_right()
         move()
@@ -26,7 +90,7 @@ repeat 1000:
                     if front_is_clear():
                         move()
                         turn_around()
-                        #go to next situation
+                        search()
                     else:
                         turn_left()
                         move()
@@ -48,7 +112,7 @@ repeat 1000:
                         turn_left()
                     else:
                         turn_right()
-                        #go to next situation
+                        search()
             else:
                 turn_left()
                 move()
@@ -65,13 +129,12 @@ repeat 1000:
                         turn_around()
                         move()
                         turn_around()
-                        #go to next situation
+                        search()
                 else:
                     turn_right()
-                    #go to next situation
+                    search()
     else:
         if front_is_clear():
             move()
         else:
             turn_left()
-        
